@@ -1,0 +1,91 @@
+<!-- 
+#    
+# Writing is an in-browser text editor, supporting LaTeX (MathJax) and Markdown, designed to be lightweight and, unlike some other similar solutions, 
+#           fast to display (no delay when writing, no flickering when writing math), as close as possible to the math.stackexchange.com editor.
+# 
+# author:   Joseph Ernest (twitter: @JosephErnest)
+# url:      http://github.com/josephernest/writing
+# license:  MIT license
+# based on: MathJax (https://www.mathjax.org/)
+#           Pagedown (http://code.google.com/archive/p/pagedown/, https://github.com/balpha/pagedown)
+#           Pagedown Extra (https://github.com/jmcmanus/pagedown-extra)
+#           StackOverflow Editor (http://dev.stackoverflow.com/content/js/mathjax-editing.js)
+#
+# bug:   * Chrome: impossible to reduce left pannel to less than 50% width. Related to https://bugs.chromium.org/p/chromium/issues/detail?id=94583.
+#          see also http://stackoverflow.com/a/40727291/1422096
+#
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="icon" href="favicon.ico" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />  
+<title>Writing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style type="text/css">
+* { margin: 0; padding: 0; border: 0; outline: 0; }
+html, body { height: 100%; overflow: hidden; }
+.column { padding: 20px; overflow: y-scroll; height: calc(100% - 40px); }
+#wmd-button-bar { display: none; }
+#wmd-input { min-width: 1px; max-width: 99%; float: left;  width: 50%; resize: horizontal; font-size: 14px; }
+#wmd-preview { border-left: 1px solid #ddd; overflow-y: auto; overflow-x: hidden; font-family: sans-serif; font-size: 15px; }
+#wmd-preview li { margin-left: 20px; }
+#wmd-preview p code { background-color: #f5f5f5; white-space: pre-wrap; padding: 3px 5px; font-size: 13px; }
+#wmd-preview pre { background-color: #f5f5f5; padding: 5px; margin: 0.5em 0 1em; overflow-x: auto; word-wrap: normal; }
+#wmd-preview blockquote { background-color: #defcff; padding: 10px; margin: 0.5em 0 1em; overflow-x: auto; word-wrap: normal; border-left: 2px solid #0ae2f5; }
+#wmd-preview blockquote p { margin-bottom: 0; }
+#wmd-preview hr { background-color: #ddd; color: #ddd; height: 1px; margin-bottom: 15px; margin-top: 15px; }
+#wmd-preview h1, #wmd-preview h2, #wmd-preview h3 { margin-bottom: 0.5em; }
+#wmd-preview p { margin-bottom: 0.75em; line-height: 1.25; }
+#wmd-preview img { max-width: 100%; max-height: 100%; }
+#wmd-preview table { display: block; width: 100%; overflow: auto; border-collapse: collapse; margin-bottom: 0.5em; }
+#wmd-preview table th { font-weight: bold; }
+#wmd-preview table th, #wmd-preview table td { padding: 6px 13px; border: 1px solid #ddd; }
+#wmd-preview table tr { background-color: #fff; border-top: 1px solid #ccc; }
+#wmd-preview table tr:nth-child(2n) { background-color: #f8f8f8; }
+#wmd-preview a { text-decoration: none; color: #07c; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="Markdown.Converter.js"></script>
+<script type="text/javascript" src="Markdown.Sanitizer.js"></script>
+<script type="text/javascript" src="Markdown.Editor.js"></script>
+<script type="text/javascript" src="Markdown.Extra.js"></script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full"></script>
+<script type="text/javascript" src="mathjax-editing_writing.js"></script>
+<script type="text/javascript" src="jspdf.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<div id="wmd-button-bar" class="wmd-button-bar"></div>
+<textarea id="wmd-input" class="column wmd-input" spellcheck="false"></textarea>
+<div id="wmd-preview" class="column wmd-preview">
+</div>
+</body>
+<script type="text/javascript">
+$('#wmd-input').focus();
+
+$(document).on('keydown', function(e) {
+    if (e.keyCode == 80 && e.ctrlKey) {    // CTRL + P 
+        var doc = new jsPDF();
+        var specialElementHandlers = {'#editor': function (element, renderer) { return true; } };
+        doc.fromHTML($('#wmd-preview').html(), 15, 15, { 'width': 170, 'elementHandlers': specialElementHandlers });
+        doc.save('file.pdf');
+        e.preventDefault();
+        return false;
+    }
+});
+
+MathJax.Hub.Config(
+{"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic: true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+ tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+ TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+ messageStyle: "none"});
+var uniqueEditorSuffix = '';
+var converter = Markdown.getSanitizingConverter();
+Markdown.Extra.init(converter);
+var editor = new Markdown.Editor(converter, '');
+var mjpd1 = new mjpd();
+mjpd1.mathjaxEditing.prepareWmdForMathJax(editor, '', [["$", "$"]]);
+editor.run();
+</script>
+</html>
