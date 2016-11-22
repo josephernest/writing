@@ -31,8 +31,9 @@ html, body { height: 100%; overflow: hidden; }
 #wmd-input { min-width: 1px; max-width: 99%; float: left;  width: 50%; resize: horizontal; font-size: 14px; }
 #wmd-preview { border-left: 1px solid #ddd; overflow-y: auto; overflow-x: hidden; font-family: sans-serif; font-size: 15px; }
 #wmd-preview li { margin-left: 20px; }
+#wmd-preview code, #wmd-input { font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif; }
 #wmd-preview p code { background-color: #f5f5f5; white-space: pre-wrap; padding: 3px 5px; font-size: 13px; }
-#wmd-preview pre { background-color: #f5f5f5; padding: 5px; margin: 0.5em 0 1em; overflow-x: auto; word-wrap: normal; }
+#wmd-preview pre { background-color: #f5f5f5; padding: 5px; margin: 0.5em 0 1em; overflow-x: auto; word-wrap: normal; font-size: 13px; }
 #wmd-preview blockquote { background-color: #defcff; padding: 10px; margin: 0.5em 0 1em; overflow-x: auto; word-wrap: normal; border-left: 2px solid #0ae2f5; }
 #wmd-preview blockquote p { margin-bottom: 0; }
 #wmd-preview hr { background-color: #ddd; color: #ddd; height: 1px; margin-bottom: 15px; margin-top: 15px; }
@@ -62,6 +63,13 @@ html, body { height: 100%; overflow: hidden; }
 </div>
 </body>
 <script type="text/javascript">
+if (localStorage.getItem("writing") !== null) {
+    $('#wmd-input').val(localStorage.getItem("writing"));
+}
+$('#wmd-input').on('change', function() {
+    localStorage.setItem("writing", $('#wmd-input').val());
+});
+
 $('#wmd-input').focus();
 
 $(document).on('keydown', function(e) {
@@ -70,6 +78,22 @@ $(document).on('keydown', function(e) {
         var specialElementHandlers = {'#editor': function (element, renderer) { return true; } };
         doc.fromHTML($('#wmd-preview').html(), 15, 15, { 'width': 170, 'elementHandlers': specialElementHandlers });
         doc.save('file.pdf');
+        e.preventDefault();
+        return false;
+    }
+    else if (e.keyCode == 77 && e.ctrlKey) {    // CTRL + M 
+        var blob = new Blob([$('#wmd-input').val()], {type: 'text'});     // http://stackoverflow.com/a/33542499/1422096
+        if (window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveBlob(blob, 'newfile.md');
+        }
+        else {
+            var elem = window.document.createElement('a');
+            elem.href = window.URL.createObjectURL(blob);
+            elem.download = 'newfile.md';        
+            document.body.appendChild(elem);
+            elem.click();        
+            document.body.removeChild(elem);
+        }
         e.preventDefault();
         return false;
     }
