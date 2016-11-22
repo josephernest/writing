@@ -1,4 +1,6 @@
-﻿// needs Markdown.Converter.js at the moment
+﻿//modification: CTRL+L disabled: //doClick(buttons.link);
+
+// needs Markdown.Converter.js at the moment
 
 (function () {
 
@@ -1242,7 +1244,7 @@
                         doClick(buttons.italic);
                         break;
                     case "l":
-                        doClick(buttons.link);
+                        //doClick(buttons.link);
                         break;
                     case "q":
                         doClick(buttons.quote);

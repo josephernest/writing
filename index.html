@@ -25,6 +25,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <style type="text/css">
 * { margin: 0; padding: 0; border: 0; outline: 0; }
+.unselectable { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
 html, body { height: 100%; overflow: hidden; }
 .column { padding: 20px; overflow: y-scroll; height: calc(100% - 40px); }
 #wmd-button-bar { display: none; }
@@ -46,6 +47,10 @@ html, body { height: 100%; overflow: hidden; }
 #wmd-preview table tr { background-color: #fff; border-top: 1px solid #ccc; }
 #wmd-preview table tr:nth-child(2n) { background-color: #f8f8f8; }
 #wmd-preview a { text-decoration: none; color: #07c; }
+#helpicon { position: absolute; bottom: 0; right: 0; margin: 5px; color: #ccc; cursor: pointer }
+#help { display: none; position: absolute; top: 10%; height: 70%; left: 25%; max-width: 50%; overflow: hidden; background-color: white; border: 1px solid #ccc; padding: 15px 30px 20px 30px; overflow-y: auto; }
+#help pre {  word-wrap: break-word !important; white-space: pre-wrap !important; }
+#closeicon { position: absolute; top: 0; right: 0; margin: 5px; color: #ccc; cursor: pointer; font-family: sans-serif; }
 </style>
 </head>
 <body>
@@ -61,16 +66,65 @@ html, body { height: 100%; overflow: hidden; }
 <textarea id="wmd-input" class="column wmd-input" spellcheck="false"></textarea>
 <div id="wmd-preview" class="column wmd-preview">
 </div>
+<div id="helpicon" class="unselectable">?</div>
+<div id="help">
+<div id="closeicon" class="unselectable">X</div>    
+<pre>    
+<a href="https://github.com/josephernest/writing">Writing</a> is a lightweight distraction-free text editor.
+Write text on the left, and the result is displayed on the right.
+
+Commands
+--------
+CTRL + M: export source code as .MD file
+CTRL + P: export as .PDF file
+CTRL + L: enable/disable LaTeX (i.e. math formulas)
+
+Markdown syntax
+---------------
+#Title
+##Subtitle
+This is *italic* and this is **bold**.
+This is a [link](http://www.example.com/) and this is an ![image](imagelink.jpg).
+Write code with `...` or by adding a 4-whitespace indent to the paragraph.
+> This is a quote.
+
+LaTeX syntax
+------------
+This formula $x^2+1$ will be displayed inline.
+This formula $$x^2+1$$ will be displayed in a new paragraph.
+
+About
+-----
+Made by <a href="https://twitter.com/JosephErnest">@JosephErnest</a>
+<a href="https://github.com/josephernest/writing">https://github.com/josephernest/writing</a>
+Uses <a href="">Pagedown</a>, <a href="">MathJax</a>, <a href="">jsPDF</a>, and StackOverflow's <a href="">editor code</a>.
+</pre>    
+</div>
 </body>
 <script type="text/javascript">
 if (localStorage.getItem("writing") !== null) {
     $('#wmd-input').val(localStorage.getItem("writing"));
 }
+
+var latexenabled = true;
+if (localStorage.getItem("latex") !== null) {
+    latexenabled = localStorage.getItem("latex");
+}
+//dosomething
+
 $('#wmd-input').on('change', function() {
     localStorage.setItem("writing", $('#wmd-input').val());
 });
 
 $('#wmd-input').focus();
+
+$('#helpicon').click(function() {
+    $('#help').show();
+});
+
+$('#closeicon, #wmd-input, #wmd-preview').click(function() {
+    $('#help').hide();
+});
 
 $(document).on('keydown', function(e) {
     if (e.keyCode == 80 && e.ctrlKey) {    // CTRL + P 
@@ -97,6 +151,16 @@ $(document).on('keydown', function(e) {
         e.preventDefault();
         return false;
     }
+    else if (e.keyCode == 76 && e.ctrlKey) {    // CTRL + L 
+        latexenabled = !latexenabled;
+        localStorage.setItem("latex", latexenabled);
+        // do something;
+        e.preventDefault();
+        return false;
+    }  
+    else if (e.keyCode == 27)  { // ESC
+        $('#help').hide();
+    }
 });
 
 MathJax.Hub.Config(
@@ -104,7 +168,6 @@ MathJax.Hub.Config(
  tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
  TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
  messageStyle: "none"});
-var uniqueEditorSuffix = '';
 var converter = Markdown.getSanitizingConverter();
 Markdown.Extra.init(converter);
 var editor = new Markdown.Editor(converter, '');
