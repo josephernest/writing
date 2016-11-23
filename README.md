@@ -3,7 +3,7 @@ Writing
 
 **Writing** is a lightweight distraction-free text editor, in the browser.
 
-[Live version](https://josephernest.github.io/Writing/)
+Live version: [Writing](https://josephernest.github.io/Writing/).
 
 ![screenshot]()
 
@@ -15,21 +15,22 @@ Just open `index.html` and that's it! There is no server code. Is that so simple
 Usage
 ----
 
-* CTRL+M: E
+* CTRL+M: Download the source code (.MD file)
 
-* CTRL+P:
+* CTRL+P: Download the output .PDF file
 
-* CTRL+L:
+* CTRL+L: Enable/disable LaTeX (for math formulas)
 
 * `?` icon (bottom right): Show help
 
 
-Why another Markdown editor ?
+Why another Markdown editor?
 ----
 There are many online editors that support Markdown but:
+
 * most of them don't support LaTeX / MathJax (for math formulas)
-* some of them do, but have a 1-sec delay between keypress and display, and I find this very annoying, see for example [StackEdit](https://www.stackedit.io),
-* some of them have annoying flickering each time you write new text, once math is present on the page.
+* some of them do, but have a 1-sec delay between keypress and display, and I find this very annoying, see for example [StackEdit](https://www.stackedit.io)
+* some of them have annoying flickering each time you write new text, once math is present on the page
 * most of them are not minimalist / distraction-free enough for me
 
 That's why I decided to make **Writing**:
