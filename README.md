@@ -3,7 +3,7 @@ Writing
 
 **Writing** is a lightweight distraction-free text editor, in the browser.
 
-[Live version](http://josephernest.github.io/writing/index.html)
+[Live version](https://josephernest.github.io/Writing/)
 
 ![screenshot]()
 
@@ -28,7 +28,7 @@ Why another Markdown editor ?
 ----
 There are many online editors that support Markdown but:
 * most of them don't support LaTeX / MathJax (for math formulas)
-* some of them do, but have a 1-sec delay between keypress and display, and I find this very annoying, see for example [StackEdit](http://www.stackedit.io),
+* some of them do, but have a 1-sec delay between keypress and display, and I find this very annoying, see for example [StackEdit](https://www.stackedit.io),
 * some of them have annoying flickering each time you write new text, once math is present on the page.
 * most of them are not minimalist / distraction-free enough for me
 
@@ -42,9 +42,9 @@ That's why I decided to make **Writing**:
 
 About
 ----
-Author: Joseph Ernest ([@JosephErnest](http://twitter.com/JosephErnest))
+Author: Joseph Ernest ([@JosephErnest](https://twitter.com/JosephErnest))
 
-Other projects: [BigPicture](http://bigpicture.bi), [bigpicture.js](http://github.com/josephernest/bigpicture.js), [AReallyBigPage](https://github.com/josephernest/AReallyBigPage), [SamplerBox](http://www.samplerbox.org), [Void](http://www.thisisvoid.org), [TalkTalkTalk](https://github.com/josephernest/TalkTalkTalk), [YellowNoiseAudio](http://www.yellownoiseaudio.com), etc.
+Other projects: [BigPicture](http://bigpicture.bi), [bigpicture.js](https://github.com/josephernest/bigpicture.js), [AReallyBigPage](https://github.com/josephernest/AReallyBigPage), [SamplerBox](http://www.samplerbox.org), [Void](http://www.thisisvoid.org), [TalkTalkTalk](https://github.com/josephernest/TalkTalkTalk), [YellowNoiseAudio](http://www.yellownoiseaudio.com), etc.
 
 License
 ----
@@ -52,6 +52,6 @@ MIT license
 
 Dependencies
 ---
-**Writing** uses [Pagedown](http://code.google.com/archive/p/pagedown/), [Pagedown Extra](https://github.com/jmcmanus/pagedown-extra), [MathJax](https://www.mathjax.org/), [jsPDF](https://github.com/MrRio/jsPDF), and StackOverflow's [editor code](https://gist.github.com/gdalgas/a652bce3a173ddc59f66).
+**Writing** uses [Pagedown](https://code.google.com/archive/p/pagedown/), [Pagedown Extra](https://github.com/jmcmanus/pagedown-extra), [MathJax](https://www.mathjax.org/), [jsPDF](https://github.com/MrRio/jsPDF), and StackOverflow's [editor code](https://gist.github.com/gdalgas/a652bce3a173ddc59f66).
 
 *Note: Some of these libraries have been slightly modified (a few lines of code), to make it work all together, that's why they are included in this package.*
