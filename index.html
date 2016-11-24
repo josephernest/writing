@@ -105,11 +105,23 @@ Uses <a href="https://code.google.com/archive/p/pagedown/">Pagedown</a>, <a href
 <script type="text/javascript">
 togglemathjax = function(enabled) {
     if (enabled) {
+        if (!latexenabledonce)
+        {
+            MathJax.Hub.Config(
+{"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic: true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+ tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+ TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+ messageStyle: "none", skipStartupTypeset: true});
+            mjpd1.mathjaxEditing.prepareWmdForMathJax(editor, '', [["$", "$"]]);
+            latexenabledonce = true;
+        }
         MathJax.Hub.queue.pending = 0;
         MathJax.Hub.Queue(["Typeset", MathJax.Hub, "wmd-preview"]);
     }
     else {
-        MathJax.Hub.queue.pending = 1;
+        MathJax.Hub.queue.pending = 1; 
+        if (editor.refreshPreview !== undefined)
+            editor.refreshPreview();
      }
 }
 
@@ -165,7 +177,6 @@ $(document).on('keydown', function(e) {
         latexenabled = !latexenabled;
         localStorage.setItem("latex", latexenabled ? "1" : "0");
         togglemathjax(latexenabled);
-        MathJax.Rerender()
         e.preventDefault();
         return false;
     }  
@@ -174,19 +185,13 @@ $(document).on('keydown', function(e) {
     }
 });
 
+var latexenabledonce = false;
 var latexenabled = localStorage.getItem("latex") !== "0";
-
-MathJax.Hub.Config(
-{"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic: true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
- tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
- TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
- messageStyle: "none", skipStartupTypeset: true});
-
 var converter = Markdown.getSanitizingConverter();
 Markdown.Extra.init(converter);
 var editor = new Markdown.Editor(converter, '');
 var mjpd1 = new mjpd();
-mjpd1.mathjaxEditing.prepareWmdForMathJax(editor, '', [["$", "$"]]);
+togglemathjax(latexenabled);
 editor.run();
 </script>
 </html>
