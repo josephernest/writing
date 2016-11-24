@@ -122,6 +122,8 @@ togglemathjax = function(enabled) {
         MathJax.Hub.queue.pending = 1; 
         if (editor.refreshPreview !== undefined)
             editor.refreshPreview();
+        else
+           MathJax.Hub.Config({ skipStartupTypeset: true});
      }
 }
 
