@@ -48,7 +48,7 @@ html, body { height: 100%; overflow: hidden; }
 #wmd-preview table tr { background-color: #fff; border-top: 1px solid #ccc; }
 #wmd-preview table tr:nth-child(2n) { background-color: #f8f8f8; }
 #wmd-preview a { text-decoration: none; color: #07c; }
-#helpicon { position: absolute; bottom: 0; right: 0; margin: 5px; color: #ccc; cursor: pointer; font-family: sans-serif; }
+#helpicon { position: absolute; bottom: 0; left: 0; margin: 5px; color: #ccc; cursor: pointer; font-family: sans-serif;  font-size: 15px; }
 #help { display: none; position: absolute; top: 10%; height: 70%; left: 25%; max-width: 50%; overflow: hidden; background-color: white; border: 1px solid #ccc; padding: 15px 30px 20px 30px; overflow-y: auto; }
 #help pre {  word-wrap: break-word !important; white-space: pre-wrap !important; }
 #closeicon { position: absolute; top: 0; right: 0; margin: 5px; color: #ccc; cursor: pointer; font-family: sans-serif; }
@@ -103,15 +103,19 @@ Uses <a href="https://code.google.com/archive/p/pagedown/">Pagedown</a>, <a href
 </div>
 </body>
 <script type="text/javascript">
+togglemathjax = function(enabled) {
+    if (enabled) {
+        MathJax.Hub.queue.pending = 0;
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, "wmd-preview"]);
+    }
+    else {
+        MathJax.Hub.queue.pending = 1;
+     }
+}
+
 if (localStorage.getItem("writing") !== null) {
     $('#wmd-input').val(localStorage.getItem("writing"));
 }
-
-var latexenabled = true;
-if (localStorage.getItem("latex") !== null) {
-    latexenabled = localStorage.getItem("latex");
-}
-//dosomething
 
 $('#wmd-input').on('change', function() {
     localStorage.setItem("writing", $('#wmd-input').val());
@@ -129,10 +133,15 @@ $('#closeicon, #wmd-input, #wmd-preview').click(function() {
 
 $(document).on('keydown', function(e) {
     if (e.keyCode == 80 && e.ctrlKey) {    // CTRL + P 
-        var doc = new jsPDF();
-        var specialElementHandlers = {'#editor': function (element, renderer) { return true; } };
-        doc.fromHTML($('#wmd-preview').html(), 15, 15, { 'width': 170, 'elementHandlers': specialElementHandlers });
-        doc.save('file.pdf');
+        //var doc = new jsPDF();
+        //var specialElementHandlers = {'#editor': function (element, renderer) { return true; } };
+        //doc.fromHTML($('#wmd-preview').html(), 15, 15, { 'width': 170, 'elementHandlers': specialElementHandlers });
+        //doc.save('file.pdf');
+        var restorepage = $('body').html();
+        var printcontent = $('#wmd-preview').clone();
+        $('body').empty().html(printcontent);
+        window.print();
+        $('body').html(restorepage);
         e.preventDefault();
         return false;
     }
@@ -154,8 +163,9 @@ $(document).on('keydown', function(e) {
     }
     else if (e.keyCode == 76 && e.ctrlKey) {    // CTRL + L 
         latexenabled = !latexenabled;
-        localStorage.setItem("latex", latexenabled);
-        // do something;
+        localStorage.setItem("latex", latexenabled ? "1" : "0");
+        togglemathjax(latexenabled);
+        MathJax.Rerender()
         e.preventDefault();
         return false;
     }  
@@ -164,11 +174,14 @@ $(document).on('keydown', function(e) {
     }
 });
 
+var latexenabled = localStorage.getItem("latex") !== "0";
+
 MathJax.Hub.Config(
 {"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic: true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
  tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
  TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
- messageStyle: "none"});
+ messageStyle: "none", skipStartupTypeset: true});
+
 var converter = Markdown.getSanitizingConverter();
 Markdown.Extra.init(converter);
 var editor = new Markdown.Editor(converter, '');
