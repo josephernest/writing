@@ -136,7 +136,7 @@ if (localStorage.getItem("writing") !== null) {
     $('#wmd-input').val(localStorage.getItem("writing"));
 }
 
-$('#wmd-input').on('change', function() {
+$('#wmd-input').on('input', function() {
     localStorage.setItem("writing", $('#wmd-input').val());
 });
 
