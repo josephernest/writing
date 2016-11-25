@@ -111,20 +111,25 @@ togglemathjax = function(enabled) {
 {"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic: true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
  tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
  TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
- messageStyle: "none", skipStartupTypeset: true});
+ messageStyle: "none", skipStartupTypeset: true });
             mjpd1.mathjaxEditing.prepareWmdForMathJax(editor, '', [["$", "$"]]);
             latexenabledonce = true;
+            if (editor.refreshPreview !== undefined)
+                editor.refreshPreview();
         }
-        MathJax.Hub.queue.pending = 0;
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub, "wmd-preview"]);
+        else {
+            MathJax.Hub.queue.pending = 0;
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, "wmd-preview"]);
+        }
     }
     else {
         MathJax.Hub.queue.pending = 1; 
         if (editor.refreshPreview !== undefined)
             editor.refreshPreview();
-        else
-           MathJax.Hub.Config({ skipStartupTypeset: true});
-     }
+        else {
+           MathJax.Hub.Config({ skipStartupTypeset: true });
+        }
+    }
 }
 
 if (localStorage.getItem("writing") !== null) {
