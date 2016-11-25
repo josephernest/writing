@@ -29,8 +29,8 @@ Why another Markdown editor?
 There are many online editors that support Markdown but:
 
 * most of them don't support LaTeX / MathJax (for math formulas)
-* some of them do, but have a 1-sec delay between keypress and display, and I find this annoying, see for example [StackEdit](https://www.stackedit.io)
-* some of them have annoying flickering each time you write new text, once math is present on the page, see for example http://markx.herokuapp.com/
+* some of them do, but have a 1-sec delay between keypress and display, and I find this annoying, see e.g. [StackEdit](https://www.stackedit.io)
+* some of them have annoying flickering each time you write new text, once math is present on the page
 * most of them are not minimalist / distraction-free enough for me
 
 That's why I decided to make **Writing**:
