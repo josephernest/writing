@@ -1,4 +1,4 @@
-﻿//modification: CTRL+L disabled: //doClick(buttons.link);
+﻿//modification: CTRL+L + CTRL+U disabled: //doClick(buttons.link);  doClick(buttons.ulist);
 
 // needs Markdown.Converter.js at the moment
 
@@ -1259,7 +1259,7 @@
                         doClick(buttons.olist);
                         break;
                     case "u":
-                        doClick(buttons.ulist);
+                        //doClick(buttons.ulist);
                         break;
                     case "h":
                         doClick(buttons.heading);
