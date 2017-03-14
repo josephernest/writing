@@ -5,7 +5,7 @@ Writing
 
 Live version: [Writing](https://josephernest.github.io/Writing/).
 
-![screenshot]()
+![screenshot](http://gget.it/5dox6p82/writing2.gif)
 
 
 Installation
@@ -17,7 +17,7 @@ Usage
 
 * CTRL+M: Download the source code (.MD file)
 
-* CTRL+P: Download the output .PDF file
+* CTRL+P: Download the output .PDF file (*currently in development*)
 
 * CTRL+L: Enable/disable LaTeX (for math formulas)
 
