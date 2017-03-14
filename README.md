@@ -5,7 +5,7 @@ Writing
 
 Live version: [Writing](https://josephernest.github.io/Writing/).
 
-![screenshot](http://gget.it/5dox6p82/writing2.gif)
+<img src="http://i.imgur.com/c56hDwi.gif" />
 
 
 Installation
