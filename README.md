@@ -15,15 +15,15 @@ Just open `index.html` and that's it! There is no server code. Is that so simple
 Usage
 ----
 
-* CTRL+D: Toggle display mode
+* CTRL + D: Toggle display mode
 
-* CTRL+P: Print or export as PDF
+* CTRL + P: Print or export as PDF
 
-* CTRL+M: Download the source code (.MD file)
+* CTRL + M: Download source code as .MD file
 
-* CTRL+L: Enable/disable LaTeX (for math formulas)
+and a few other commands (change font, etc.) that can be found in:
 
-* CTRL+SHIFT+H or `?` icon (bottom left): Show help
+* CTRL+SHIFT+H or `?` bottom-left icon: Show help
 
 
 Why another Markdown editor? Why not just use StackEdit?
@@ -55,6 +55,6 @@ MIT license
 
 Dependencies
 ---
-**Writing** uses [Pagedown](https://code.google.com/archive/p/pagedown/), [Pagedown Extra](https://github.com/jmcmanus/pagedown-extra), [MathJax](https://www.mathjax.org/), and StackOverflow's [editor code](https://gist.github.com/gdalgas/a652bce3a173ddc59f66).
+**Writing** uses [Pagedown](https://code.google.com/archive/p/pagedown/), [Pagedown Extra](https://github.com/jmcmanus/pagedown-extra), [MathJax](https://www.mathjax.org/), StackOverflow's [editor code](https://gist.github.com/gdalgas/a652bce3a173ddc59f66), and the [Computer Modern](http://cm-unicode.sourceforge.net/) font.
 
 *Note: Some of these libraries have been slightly modified (a few lines of code), to make it work all together, that's why they are included in this package.*
