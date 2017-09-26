@@ -19,7 +19,7 @@ Usage
 
 * CTRL + P: Print or export as PDF
 
-* CTRL + M: Download source code as .MD file
+* CTRL + S: Save source code as .MD file
 
 and a few other commands (change font, etc.) that can be found in:
 
