@@ -3,7 +3,7 @@ Writing
 
 **Writing** is a lightweight distraction-free text editor, in the browser.
 
-Live version: [Writing](https://josephernest.github.io/Writing/).
+Live version: [Writing](https://josephernest.github.io/writing/).
 
 <img src="http://i.imgur.com/c56hDwi.gif" />
 
@@ -17,6 +17,8 @@ Usage
 
 * CTRL+D: Toggle display mode
 
+* CTRL+P: Print or export as PDF
+
 * CTRL+M: Download the source code (.MD file)
 
 * CTRL+L: Enable/disable LaTeX (for math formulas)
@@ -24,12 +26,12 @@ Usage
 * CTRL+SHIFT+H or `?` icon (bottom left): Show help
 
 
-Why another Markdown editor?
+Why another Markdown editor? Why not just use StackEdit?
 ----
 There are many online editors that support Markdown but:
 
-* most of them don't support LaTeX / MathJax (for math formulas)
-* some of them do, but have a 1-sec delay between keypress and display, and I find this annoying, see e.g. [StackEdit](https://www.stackedit.io)
+* half of them don't support LaTeX / MathJax (for math formulas)
+* some of them do, but have a **1-sec delay between keypress and display**, and I find this annoying, see e.g. [StackEdit](https://www.stackedit.io)
 * some of them have annoying flickering each time you write new text, once math is present on the page
 * most of them are not minimalist / distraction-free enough for me
 
@@ -38,7 +40,7 @@ That's why I decided to make **Writing**:
 * open-source
 * no server needed, you can run it offline
 * fast rendering (no delay when writing / no flickering of math equations)
-* **just what you need: write, preview, save the code (CTRL+M), save as PDF (CTRL+P), and nothing else**
+* **just what you need: write, preview, save the code (CTRL+M), print or save as PDF (CTRL+P), and nothing else**
 * LPWP website, a.k.a. "Landing Page=Working Page", i.e. the first page that you visit on the website is the page *where things actually happen*, that means that there is no annoying welcome page or login page, etc.
 
 About
