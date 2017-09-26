@@ -1,4 +1,4 @@
-﻿//modification: CTRL+L + CTRL+U disabled: //doClick(buttons.link);  doClick(buttons.ulist);
+﻿//modification JB: CTRL+L + CTRL+U disabled: //doClick(buttons.link);  doClick(buttons.ulist);
 
 // needs Markdown.Converter.js at the moment
 

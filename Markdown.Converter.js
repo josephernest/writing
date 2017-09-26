@@ -1,3 +1,5 @@
+//modification JB: \pagebreak
+
 "use strict";
 var Markdown;
 
@@ -299,6 +301,8 @@ else
             text = text.replace(/~T/g, "~");
 
             text = pluginHooks.postConversion(text);
+
+            text = text.replace(/\\pagebreak/g, '<div style="page-break-after: always;" class="pagebreak"></div>');
 
             g_html_blocks = g_titles = g_urls = null;
 

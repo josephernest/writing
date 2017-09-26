@@ -15,13 +15,13 @@ Just open `index.html` and that's it! There is no server code. Is that so simple
 Usage
 ----
 
-* CTRL+M: Download the source code (.MD file)
+* CTRL+D: Toggle display mode
 
-* CTRL+P: Download the output .PDF file (*currently in development*)
+* CTRL+M: Download the source code (.MD file)
 
 * CTRL+L: Enable/disable LaTeX (for math formulas)
 
-* `?` icon (bottom right): Show help
+* CTRL+SHIFT+H or `?` icon (bottom left): Show help
 
 
 Why another Markdown editor?
@@ -53,6 +53,6 @@ MIT license
 
 Dependencies
 ---
-**Writing** uses [Pagedown](https://code.google.com/archive/p/pagedown/), [Pagedown Extra](https://github.com/jmcmanus/pagedown-extra), [MathJax](https://www.mathjax.org/), [jsPDF](https://github.com/MrRio/jsPDF), and StackOverflow's [editor code](https://gist.github.com/gdalgas/a652bce3a173ddc59f66).
+**Writing** uses [Pagedown](https://code.google.com/archive/p/pagedown/), [Pagedown Extra](https://github.com/jmcmanus/pagedown-extra), [MathJax](https://www.mathjax.org/), and StackOverflow's [editor code](https://gist.github.com/gdalgas/a652bce3a173ddc59f66).
 
 *Note: Some of these libraries have been slightly modified (a few lines of code), to make it work all together, that's why they are included in this package.*
