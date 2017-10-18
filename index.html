@@ -270,6 +270,8 @@ $(document).on('keydown', function(e) {
     }
     else if (e.keyCode == 79 && e.ctrlKey && e.shiftKey) {    // CTRL + SHIFT + O
         $('#openFileInput').click();
+        e.preventDefault();
+        return false;
     } 
     else if (e.keyCode == 27)  { // ESC
         $('#help').hide();
