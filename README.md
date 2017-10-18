@@ -31,7 +31,7 @@ Why another Markdown editor? Why not just use StackEdit?
 There are many online editors that support Markdown but:
 
 * half of them don't support LaTeX / MathJax (for math formulas)
-* some of them do, but have a **1-sec delay between keypress and display**, and I find this annoying, see e.g. [StackEdit](https://www.stackedit.io)
+* some of them do, but have a **1-sec delay between keypress and display**, and I find this annoying, see e.g. [StackEdit](https://stackedit.io)
 * some of them have annoying flickering each time you write new text, once math is present on the page
 * most of them are not minimalist / distraction-free enough for me
 
