@@ -59,6 +59,7 @@ html { font-family: sans-serif; }
 #help { display: none; position: fixed; top: 10%; height: 70%; left: 25%; max-width: 50%; overflow: hidden; background-color: white; border: 1px solid #ccc; padding: 15px 30px 20px 30px; overflow-y: auto; }
 #help pre {  word-wrap: break-word !important; white-space: pre-wrap !important; }
 #closeicon { position: fixed; top: 10%; left: 25%; margin: 5px 8px; color: #ccc; cursor: pointer; font-family: sans-serif; }
+#openFileInput { position: absolute; display: none; }
 
 @media print { 
     #helpicon { display: none; } 
@@ -76,7 +77,7 @@ html { font-family: sans-serif; }
 <script type="text/javascript" src="mathjax-editing_writing.js"></script>
 <!-- <script type="text/javascript" src="jspdf.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<input id="openFileInput" type="file" style="position:absolute;top:-100px;" />
+<input id="openFileInput" type="file" />
 <div id="wmd-button-bar" class="wmd-button-bar"></div>
 <textarea id="wmd-input" class="column wmd-input" spellcheck="false"></textarea>
 <div id="wmd-preview" class="column wmd-preview">
@@ -162,7 +163,7 @@ if (localStorage.getItem("writing") !== null) {
     $('#wmd-input').val(localStorage.getItem("writing"));
 }
     
-openFile = function(e) {
+openFile = function(e) {         // https://stackoverflow.com/a/26298948/1422096
   var file = e.target.files[0];
   if (!file) {
     return;
@@ -170,12 +171,12 @@ openFile = function(e) {
   var reader = new FileReader();
   reader.onload = function(e) {
     var contents = e.target.result;
-    // Display file content
-    $('#wmd-input').val(contents);
+    $('#wmd-input').val(contents);        // display file content
     editor.refreshPreview();
   };
   reader.readAsText(file);
 }
+
 document.getElementById('openFileInput').addEventListener('change', openFile, false);
 
 $('#wmd-input').on('input', function() {
