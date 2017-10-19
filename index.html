@@ -76,6 +76,7 @@ html { font-family: sans-serif; }
 <script type="text/javascript" src="mathjax-editing_writing.js"></script>
 <!-- <script type="text/javascript" src="jspdf.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<input id="openFileInput" type="file" style="position:absolute;top:-100px;" />
 <div id="wmd-button-bar" class="wmd-button-bar"></div>
 <textarea id="wmd-input" class="column wmd-input" spellcheck="false"></textarea>
 <div id="wmd-preview" class="column wmd-preview">
@@ -93,6 +94,7 @@ Commands
 CTRL + D: toggle display mode (editor only, preview only or both-at-the-same-time)
 CTRL + P: print or export as PDF
 CTRL + S: save source code as .MD file
+CTRL + SHIFT + O: open .MD file
 
 CTRL + SHIFT + L: enable / disable LaTeX (i.e. math formulas)
 CTRL + SHIFT + R: toggle roman (LaTex-like) or sans-serif font
@@ -159,6 +161,22 @@ togglemathjax = function(enabled) {
 if (localStorage.getItem("writing") !== null) {
     $('#wmd-input').val(localStorage.getItem("writing"));
 }
+    
+openFile = function(e) {
+  var file = e.target.files[0];
+  if (!file) {
+    return;
+  }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var contents = e.target.result;
+    // Display file content
+    $('#wmd-input').val(contents);
+    editor.refreshPreview();
+  };
+  reader.readAsText(file);
+}
+document.getElementById('openFileInput').addEventListener('change', openFile, false);
 
 $('#wmd-input').on('input', function() {
     localStorage.setItem("writing", $('#wmd-input').val());
@@ -251,7 +269,12 @@ $(document).on('keydown', function(e) {
         togglemathjax(latexenabled);
         e.preventDefault();
         return false;
-    }  
+    }
+    else if (e.keyCode == 79 && e.ctrlKey && e.shiftKey) {    // CTRL + SHIFT + O
+        $('#openFileInput').click();
+        e.preventDefault();
+        return false;
+    } 
     else if (e.keyCode == 27)  { // ESC
         $('#help').hide();
     }
