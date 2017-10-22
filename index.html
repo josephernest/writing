@@ -163,8 +163,11 @@ if (localStorage.getItem("writing") !== null) {
     $('#wmd-input').val(localStorage.getItem("writing"));
 }
     
-openFile = function(e) {         // https://stackoverflow.com/a/26298948/1422096
-  var file = e.target.files[0];
+openFile = function(e) {         
+  readFile(e.target.files[0]);
+}
+
+readFile = function(file){ // https://stackoverflow.com/a/26298948/1422096
   if (!file) {
     return;
   }
@@ -178,6 +181,14 @@ openFile = function(e) {         // https://stackoverflow.com/a/26298948/1422096
 }
 
 document.getElementById('openFileInput').addEventListener('change', openFile, false);
+
+$('#wmd-input').on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  })
+  .on('drop', function(e) {
+    readFile(e.originalEvent.dataTransfer.files[0]);
+});
 
 $('#wmd-input').on('input', function() {
     localStorage.setItem("writing", $('#wmd-input').val());
