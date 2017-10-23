@@ -16,11 +16,11 @@
 <!DOCTYPE html>
 <html class="fixedheight texroman">
 <head>
-<link rel="icon" href="favicon.ico" />
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />  
+<link rel="icon" href="favicon.ico">
+<meta charset="utf-8">
 <title>Writing</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<style type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
 @font-face {
     font-family: texroman;
     src: url(cmunrm.otf); /* https://tex.stackexchange.com/a/267197/27733 */
@@ -80,13 +80,13 @@ html { font-family: sans-serif; }
 
 </head>
 <body class="fixedheight">
-<script type="text/javascript" src="Markdown.Converter.js"></script>
-<script type="text/javascript" src="Markdown.Sanitizer.js"></script>
-<script type="text/javascript" src="Markdown.Editor.js"></script>
-<script type="text/javascript" src="Markdown.Extra.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
-<script type="text/javascript" src="mathjax-editing_writing.js"></script>
-<!-- <script type="text/javascript" src="jspdf.min.js"></script> -->
+<script src="Markdown.Converter.js"></script>
+<script src="Markdown.Sanitizer.js"></script>
+<script src="Markdown.Editor.js"></script>
+<script src="Markdown.Extra.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+<script src="mathjax-editing_writing.js"></script>
+<!-- <script src="jspdf.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <input id="openFileInput" type="file" />
 <div id="wmd-button-bar" class="wmd-button-bar"></div>
@@ -141,7 +141,7 @@ Uses <a href="https://code.google.com/archive/p/pagedown/">Pagedown</a>, <a href
 </pre>    
 </div>
 
-<script type="text/javascript">
+<script>
 togglemathjax = function(enabled) {
     if (enabled) {
         if (!latexenabledonce)
