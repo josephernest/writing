@@ -17,8 +17,6 @@ Usage
 
 * CTRL + D: Toggle display mode
 
-* CTRL + SHIFT + D: Toggle dark mode
-
 * CTRL + P: Print or export as PDF
 
 * CTRL + S: Save source code as .MD file
@@ -42,7 +40,7 @@ That's why I decided to make **Writing**:
 * open-source
 * no server needed, you can run it offline
 * fast rendering (no delay when writing / no flickering of math equations)
-* **just what you need: write, preview, save the code (CTRL+S), print or save as PDF (CTRL+P), and nothing else**
+* **just what you need: write, preview, save the code, print or save as PDF, and nothing else**
 * LPWP website, a.k.a. "Landing Page=Working Page", i.e. the first page that you visit on the website is the page *where things actually happen*, that means that there is no annoying welcome page or login page, etc.
 
 About
