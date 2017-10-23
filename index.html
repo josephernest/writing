@@ -172,20 +172,18 @@ togglemathjax = function(enabled) {
 }
 
 toggledarkmode = function(enabled){
-  if(enabled){
-    $('body').addClass('dark-mode');
-  }
-  else{
-    $('body').removeClass('dark-mode');
-  }
+    $('body').toggleClass('dark-mode',enabled);
 }
 
 if (localStorage.getItem("writing") !== null) {
     $('#wmd-input').val(localStorage.getItem("writing"));
 }
     
-openFile = function(e) {         // https://stackoverflow.com/a/26298948/1422096
-  var file = e.target.files[0];
+openFile = function(e) {         
+  readFile(e.target.files[0]);
+}
+
+readFile = function(file){ // https://stackoverflow.com/a/26298948/1422096
   if (!file) {
     return;
   }
@@ -199,6 +197,14 @@ openFile = function(e) {         // https://stackoverflow.com/a/26298948/1422096
 }
 
 document.getElementById('openFileInput').addEventListener('change', openFile, false);
+
+$('body').on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  })
+  .on('drop', function(e) {
+    readFile(e.originalEvent.dataTransfer.files[0]);
+});
 
 $('#wmd-input').on('input', function() {
     localStorage.setItem("writing", $('#wmd-input').val());
@@ -215,7 +221,7 @@ $('#closeicon, #wmd-input, #wmd-preview').click(function() {
 });
 
 $(document).on('keydown', function(e) {
-    if (e.keyCode == 80 && e.ctrlKey) {    // CTRL + P 
+    if (e.keyCode == 80 && (e.ctrlKey || e.metaKey)) {    // CTRL + P 
         if (mode != 1) {
             mode = 1;
             $('#wmd-input').hide();
@@ -240,7 +246,7 @@ $(document).on('keydown', function(e) {
         e.preventDefault();
         return false;*/
     }
-    else if (e.keyCode == 83 && e.ctrlKey) {    // CTRL + S
+    else if (e.keyCode == 83 && (e.ctrlKey || e.metaKey)) {    // CTRL + S
         var blob = new Blob([$('#wmd-input').val()], {type: 'text'});     // https://stackoverflow.com/a/33542499/1422096
         if (window.navigator.msSaveOrOpenBlob) {
             window.navigator.msSaveBlob(blob, 'newfile.md');
@@ -256,7 +262,7 @@ $(document).on('keydown', function(e) {
         e.preventDefault();
         return false;
     }
-    else if (e.keyCode == 68 && e.ctrlKey && !e.shiftKey) {    // CTRL + D
+    else if (e.keyCode == 68 && (e.ctrlKey || e.metaKey) && !e.shiftKey) {    // CTRL + D
         mode += 1; if (mode == 3) mode = 0;
         if (mode == 1) {
             $('#wmd-input').hide();
@@ -277,31 +283,31 @@ $(document).on('keydown', function(e) {
         e.preventDefault();
         return false;
     }        
-    else if (e.keyCode == 72 && e.ctrlKey && e.shiftKey) {    // CTRL + H
+    else if (e.keyCode == 72 && (e.ctrlKey || e.metaKey) && e.shiftKey) {    // CTRL + H
         $('#help').show();
         e.preventDefault();
         return false;
     }
-    else if (e.keyCode == 68 && e.ctrlKey && e.shiftKey) {    // CTRL + SHIFT + D
+    else if (e.keyCode == 68 && (e.ctrlKey || e.metaKey) && e.shiftKey) {    // CTRL + SHIFT + D
       darkmodeenabled = !darkmodeenabled;
       localStorage.setItem("darkmode", darkmodeenabled ? "1" : "0");
       toggledarkmode(darkmodeenabled);
       e.preventDefault();
       return false;
-    }
-    else if (e.keyCode == 82 && e.ctrlKey && e.shiftKey) {    // CTRL + SHIFT + R
+    }    
+    else if (e.keyCode == 82 && (e.ctrlKey || e.metaKey) && e.shiftKey) {    // CTRL + SHIFT + R
         $('html').toggleClass('texroman');
         e.preventDefault();
         return false;
     }    
-    else if (e.keyCode == 76 && e.ctrlKey && e.shiftKey) {    // CTRL + SHIFT + L 
+    else if (e.keyCode == 76 && (e.ctrlKey || e.metaKey) && e.shiftKey) {    // CTRL + SHIFT + L 
         latexenabled = !latexenabled;
         localStorage.setItem("latex", latexenabled ? "1" : "0");
         togglemathjax(latexenabled);
         e.preventDefault();
         return false;
     }
-    else if (e.keyCode == 79 && e.ctrlKey && e.shiftKey) {    // CTRL + SHIFT + O
+    else if (e.keyCode == 79 && (e.ctrlKey || e.metaKey) && e.shiftKey) {    // CTRL + SHIFT + O
         $('#openFileInput').click();
         e.preventDefault();
         return false;
