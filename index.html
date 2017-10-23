@@ -14,20 +14,45 @@
 -->
 
 <!DOCTYPE html>
-<html class="fixedheight texroman">
+<html class="fixedheight cmuserif">
 <head>
 <link rel="icon" href="favicon.ico" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />  
 <title>Writing</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <style type="text/css">
+/* https://sourceforge.net/projects/cm-unicode/ */
 @font-face {
-    font-family: texroman;
-    src: url(cmunrm.otf); /* https://tex.stackexchange.com/a/267197/27733 */
+    font-family: CMUSerif;
+    src: url('cmunrm.otf');
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+}
+@font-face {
+    font-family: CMUSerif;
+    src: url('cmunti.otf');
+    font-weight: 400;
+    font-style: italic;
+    font-stretch: normal;
+}
+@font-face {
+    font-family: CMUSerif;
+    src: url('cmunbx.otf');
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+}
+@font-face {
+    font-family: CMUSerif;
+    src: url('cmunbi.otf');
+    font-weight: 700;
+    font-style: italic;
+    font-stretch: normal;
 }
 
 html { font-family: sans-serif; }
-.texroman { font-family: texroman !important; }
+.cmuserif { font-family: CMUSerif !important; }
 * { margin: 0; padding: 0; border: 0; outline: 0; }
 .unselectable { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
 .fixedheight { height: 100%; }
@@ -296,7 +321,7 @@ $(document).on('keydown', function(e) {
       return false;
     }    
     else if (e.keyCode == 82 && (e.ctrlKey || e.metaKey) && e.shiftKey) {    // CTRL + SHIFT + R
-        $('html').toggleClass('texroman');
+        $('html').toggleClass('cmuserif');
         e.preventDefault();
         return false;
     }    
