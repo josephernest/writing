@@ -182,7 +182,7 @@ readFile = function(file){ // https://stackoverflow.com/a/26298948/1422096
 
 document.getElementById('openFileInput').addEventListener('change', openFile, false);
 
-$('#wmd-input').on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+$('body').on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
     e.preventDefault();
     e.stopPropagation();
   })
