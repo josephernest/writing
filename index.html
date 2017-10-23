@@ -137,6 +137,18 @@ href="http://trunk.xtf.dk/Project/ScrollSync/">jquery.scrollSync</a> and the <a 
 <script type="text/javascript">
 $("#wmd-input, #wmd-preview").scrollSync();
 
+function scrollBothToTop(cb) {
+    // It only functions if async on page load
+    setTimeout(function () {
+        $("#wmd-input")[0].scrollTop = 0;
+        $("#wmd-preview")[0].scrollTop = 0;
+
+        if (cb) {
+            cb();
+        }
+    }, 0);
+}
+
 togglemathjax = function(enabled) {
     if (enabled) {
         if (!latexenabledonce)
@@ -168,6 +180,7 @@ togglemathjax = function(enabled) {
 
 if (localStorage.getItem("writing") !== null) {
     $('#wmd-input').val(localStorage.getItem("writing"));
+    scrollBothToTop();
 }
     
 openFile = function(e) {         
@@ -183,6 +196,7 @@ readFile = function(file){ // https://stackoverflow.com/a/26298948/1422096
     var contents = e.target.result;
     $('#wmd-input').val(contents);        // display file content
     editor.refreshPreview();
+    scrollBothToTop();
   };
   reader.readAsText(file);
 }
