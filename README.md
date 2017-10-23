@@ -17,6 +17,8 @@ Usage
 
 * CTRL + D: Toggle display mode
 
+* CTRL + SHIFT + D: Toggle dark mode
+
 * CTRL + P: Print or export as PDF
 
 * CTRL + S: Save source code as .MD file
