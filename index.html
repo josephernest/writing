@@ -35,7 +35,7 @@ html { font-family: sans-serif; }
 .column { padding: 20px; }
 #wmd-button-bar { display: none; }
 #wmd-input { float: left; box-sizing: border-box; width: 50%; resize: horizontal; font-size: 14px; border-right: 1px solid #ddd; height: 100%; overflow: y-scroll; }
-#wmd-preview { overflow-y: auto; overflow-x: hidden; font-size: 15px; height: 100%; box-sizing: border-box; }
+#wmd-preview { overflow-y: auto; overflow-x: hidden; font-size: 15px; height: 100%; box-sizing: border-box; min-height: 100vh; }
 #wmd-preview li { margin-left: 20px; }
 #wmd-preview code, #wmd-input { font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif; }
 #wmd-preview p code, #wmd-preview li code { background-color: #f5f5f5; white-space: pre-wrap; padding: 3px 5px; font-size: 13px; }
@@ -66,6 +66,17 @@ html { font-family: sans-serif; }
     #helpicon { display: none; } 
     #wmd-preview .pagebreak { opacity: 0; }
 }
+
+.dark-mode #wmd-input, .dark-mode #wmd-preview  { background-color: #212121; color: #FAFAFA; border-color: #757575;}
+.dark-mode #wmd-preview a, .dark-mode #help a, .dark-mode .wmd-prompt-dialog a { color: #90CAF9; }
+.dark-mode #wmd-preview p code, .dark-mode #wmd-preview li code, .dark-mode #wmd-preview pre { background-color: #424242; }
+.dark-mode #wmd-preview table th, .dark-mode #wmd-preview table td { border-color: #757575; }
+.dark-mode #wmd-preview table tr { background-color: #424242; border-color: #757575; }
+.dark-mode #help { background-color: #424242; border-color: #757575; color: #FAFAFA; }
+.dark-mode .wmd-prompt-dialog { background-color: #424242; color: #FAFAFA; }
+.dark-mode .wmd-prompt-dialog input { background-color: #212121; color: #FAFAFA; }
+.dark-mode #wmd-preview blockquote { background-color: #00796B; border-color: #004D40; }
+
 </style>
 
 </head>
@@ -100,6 +111,7 @@ CTRL + S: save source code as .MD file
 CTRL + SHIFT + O: open .MD file
 
 CTRL + SHIFT + L: enable / disable LaTeX (i.e. math formulas)
+CTRL + SHIFT + D: toggle dark mode
 CTRL + SHIFT + R: toggle roman (LaTex-like) or sans-serif font
 CTRL + SHIFT + H: show this help dialog
 
@@ -179,6 +191,10 @@ togglemathjax = function(enabled) {
     }
 }
 
+toggledarkmode = function(enabled){
+    $('body').toggleClass('dark-mode',enabled);
+}
+
 if (localStorage.getItem("writing") !== null) {
     $('#wmd-input').val(localStorage.getItem("writing"));
     scrollBothToTop();
@@ -234,8 +250,10 @@ $(document).on('keydown', function(e) {
             $('#wmd-preview').show();
             $('body').removeClass('fixedheight');
             $('html').removeClass('fixedheight');
+            toggledarkmode(false);
             e.preventDefault();
             window.print();
+            toggledarkmode(darkmodeenabled);
             return false;
         }
         //var doc = new jsPDF();
@@ -266,7 +284,7 @@ $(document).on('keydown', function(e) {
         e.preventDefault();
         return false;
     }
-    else if (e.keyCode == 68 && (e.ctrlKey || e.metaKey)) {    // CTRL + D
+    else if (e.keyCode == 68 && (e.ctrlKey || e.metaKey) && !e.shiftKey) {    // CTRL + D
         mode += 1; if (mode == 3) mode = 0;
         if (mode == 1) {
             $('#wmd-input').hide();
@@ -291,6 +309,13 @@ $(document).on('keydown', function(e) {
         $('#help').show();
         e.preventDefault();
         return false;
+    }
+    else if (e.keyCode == 68 && (e.ctrlKey || e.metaKey) && e.shiftKey) {    // CTRL + SHIFT + D
+      darkmodeenabled = !darkmodeenabled;
+      localStorage.setItem("darkmode", darkmodeenabled ? "1" : "0");
+      toggledarkmode(darkmodeenabled);
+      e.preventDefault();
+      return false;
     }    
     else if (e.keyCode == 82 && (e.ctrlKey || e.metaKey) && e.shiftKey) {    // CTRL + SHIFT + R
         $('html').toggleClass('texroman');
@@ -317,11 +342,13 @@ $(document).on('keydown', function(e) {
 var mode = 0;
 var latexenabledonce = false;
 var latexenabled = localStorage.getItem("latex") !== "0";
+var darkmodeenabled = localStorage.getItem("darkmode") == "1";
 var converter = Markdown.getSanitizingConverter();
 Markdown.Extra.init(converter);
 var editor = new Markdown.Editor(converter, '');
 var mjpd1 = new mjpd();
 togglemathjax(latexenabled);
+toggledarkmode(darkmodeenabled);
 editor.run();
 </script>
 </body>
