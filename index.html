@@ -31,7 +31,7 @@ html { font-family: sans-serif; }
 .fixedheight { height: 100%; }
 .column { padding: 20px; }
 #wmd-button-bar { display: none; }
-#wmd-input { float: left; box-sizing: border-box; width: 50%; resize: horizontal; font-size: 14px; border-right: 1px solid #ddd; height: 100%; overflow: y-scroll; }
+#wmd-input { float: left; box-sizing: border-box; width: 50%; resize: horizontal; font-size: 14px; border-right: 1px solid #ddd; height: 95%; overflow: y-scroll; }
 #wmd-preview { overflow-y: auto; overflow-x: hidden; font-size: 15px; height: 100%; box-sizing: border-box; min-height: 100vh; }
 #wmd-preview li { margin-left: 20px; }
 #wmd-preview code, #wmd-input { font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif; }
@@ -53,7 +53,7 @@ html { font-family: sans-serif; }
 #wmd-preview table tr:nth-child(2n) { background-color: #f8f8f8; }
 #wmd-preview a { text-decoration: none; color: #07c; }
 #wmd-preview .pagebreak { border-bottom: 1px dashed #eee; padding-top: 20px; margin-bottom: 30px; }
-#helpicon { position: absolute; bottom: 0; left: 0; margin: 5px; color: #ccc; cursor: pointer; font-family: sans-serif;  font-size: 15px; }
+#helpicon { border-radius: 5px; position: absolute; bottom: 0; left: 0; margin: 5px; color: #fff; cursor: pointer; font-family: sans-serif;  font-size: 18px; background-color: #303030; width: 20px; text-align: center; padding: 2px; }
 #help { display: none; position: fixed; top: 10%; height: 70%; left: 25%; max-width: 50%; overflow: hidden; background-color: white; border: 1px solid #ccc; padding: 15px 30px 20px 30px; overflow-y: auto; }
 #help pre {  word-wrap: break-word !important; white-space: pre-wrap !important; }
 #closeicon { position: fixed; top: 10%; left: 25%; margin: 5px 8px; color: #ccc; cursor: pointer; font-family: sans-serif; }
@@ -95,11 +95,11 @@ html { font-family: sans-serif; }
 <div id="helpicon" class="unselectable">?</div>
 <div id="help">
 <div id="closeicon" class="unselectable">X</div>    
-<pre>    
+<pre class="texroman">    
 <a href="https://github.com/josephernest/writing">Writing</a> is a lightweight distraction-free text editor.
 Write text on the left, and the result is displayed on the right.
 
-Commands
+<span style="font-size: 20px;">Commands</span>
 --------
 CTRL + D: toggle display mode (editor only, preview only or both-at-the-same-time)
 CTRL + P: print or export as PDF
@@ -113,7 +113,7 @@ CTRL + SHIFT + H: show this help dialog
 
 F11: full-screen (in most browsers)
 
-Markdown syntax
+<span style="font-size: 20px;">Markdown syntax</span>
 ---------------
 #Title
 ##Subtitle
@@ -122,16 +122,16 @@ This is a [link](http://www.example.com/) and this is an ![image](imagelink.jpg)
 Write code with `...` or by adding a 4-whitespace indent to the paragraph.
 > This is a quote.
 
-LaTeX syntax
+<span style="font-size: 20px;">LaTeX syntax</span>
 ------------
-This formula $x^2+1$ will be displayed inline.
-This formula $$x^2+1$$ will be displayed in a new paragraph.
+This formula $ x^2+1 $ will be displayed inline.
+This formula $$ x^2+1 $$ will be displayed in a new paragraph.
 
-Specific syntax
+<span style="font-size: 20px;">Specific syntax</span>
 ---------------
 \pagebreak will trigger a pagebreak when printing / exporting to PDF.
 
-About
+<span style="font-size: 20px;">About</span>
 -----
 Made by <a href="https://twitter.com/JosephErnest">@JosephErnest</a>
 <a href="https://github.com/josephernest/writing">https://github.com/josephernest/writing</a>
