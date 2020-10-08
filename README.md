@@ -47,7 +47,7 @@ About
 ----
 Author: Joseph Ernest ([@JosephErnest](https://twitter.com/JosephErnest))
 
-Other projects: [BigPicture](http://bigpicture.bi), [bigpicture.js](https://github.com/josephernest/bigpicture.js), [AReallyBigPage](https://github.com/josephernest/AReallyBigPage), [SamplerBox](http://www.samplerbox.org), [Void](http://www.thisisvoid.org), [TalkTalkTalk](https://github.com/josephernest/TalkTalkTalk), [YellowNoiseAudio](http://www.yellownoiseaudio.com), etc.
+Other projects: [BigPicture](http://bigpicture.bi), [bigpicture.js](https://github.com/josephernest/bigpicture.js), [AReallyBigPage](https://github.com/josephernest/AReallyBigPage), [SamplerBox](http://www.samplerbox.org), [Void](https://github.com/josephernest/void), [TalkTalkTalk](https://github.com/josephernest/TalkTalkTalk), [sdfgh](https://github.com/josephernest/sdfgh), [RaspFIP](https://github.com/josephernest/RaspFIP/), [Yopp](https://github.com/josephernest/Yopp), etc.
 
 License
 ----
