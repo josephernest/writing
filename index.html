@@ -1,8 +1,8 @@
-<!-- 
-#    
-# Writing is an in-browser text editor, supporting LaTeX (MathJax) and Markdown, designed to be lightweight and, unlike some other similar solutions, 
+<!--
+#
+# Writing is an in-browser text editor, supporting LaTeX (MathJax) and Markdown, designed to be lightweight and, unlike some other similar solutions,
 #           fast to display (no delay when writing, no flickering when writing math), as close as possible to the math.stackexchange.com editor.
-# 
+#
 # author:   Joseph Ernest (twitter: @JosephErnest)
 # url:      https://github.com/josephernest/writing
 # license:  MIT license
@@ -17,7 +17,7 @@
 <html class="fixedheight texroman">
 <head>
 <link rel="icon" href="favicon.ico" />
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />  
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Writing</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <style type="text/css">
@@ -26,7 +26,7 @@
 
 html { font-family: sans-serif; }
 * { margin: 0; padding: 0; border: 0; outline: 0; }
-.texroman { font-family: texroman !important; }    
+.texroman { font-family: texroman !important; }
 .unselectable { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
 .fixedheight { height: 100%; }
 .column { padding: 20px; }
@@ -59,8 +59,8 @@ html { font-family: sans-serif; }
 #closeicon { position: fixed; top: 10%; left: 25%; margin: 5px 8px; color: #ccc; cursor: pointer; font-family: sans-serif; }
 #openFileInput { position: absolute; display: none; }
 
-@media print { 
-    #helpicon { display: none; } 
+@media print {
+    #helpicon { display: none; }
     #wmd-preview .pagebreak { opacity: 0; }
 }
 
@@ -94,8 +94,8 @@ html { font-family: sans-serif; }
 </div>
 <div id="helpicon" class="unselectable">?</div>
 <div id="help">
-<div id="closeicon" class="unselectable">X</div>    
-<pre>    
+<div id="closeicon" class="unselectable">X</div>
+<pre>
 <a href="https://github.com/josephernest/writing">Writing</a> is a lightweight distraction-free text editor.
 Write text on the left, and the result is displayed on the right.
 
@@ -136,7 +136,7 @@ About
 Made by <a href="https://twitter.com/JosephErnest">@JosephErnest</a>
 <a href="https://github.com/josephernest/writing">https://github.com/josephernest/writing</a>
 Uses <a href="https://code.google.com/archive/p/pagedown/">Pagedown</a>, <a href="https://github.com/jmcmanus/pagedown-extra">Pagedown Extra</a>, <a href="https://www.mathjax.org/">MathJax</a>, StackOverflow's <a href="https://gist.github.com/gdalgas/a652bce3a173ddc59f66">editor</a> code and the <a href="http://cm-unicode.sourceforge.net/">Computer Modern</a> font.
-</pre>    
+</pre>
 </div>
 
 <script type="text/javascript">
@@ -160,7 +160,7 @@ togglemathjax = function(enabled) {
         }
     }
     else {
-        MathJax.Hub.queue.pending = 1; 
+        MathJax.Hub.queue.pending = 1;
         if (editor.refreshPreview !== undefined)
             editor.refreshPreview();
         else {
@@ -173,11 +173,15 @@ toggledarkmode = function(enabled){
     $('body').toggleClass('dark-mode',enabled);
 }
 
+settitle = function(){
+  $('title').html($('#wmd-preview').find('h1').first().text());
+}
+
 if (localStorage.getItem("writing") !== null) {
     $('#wmd-input').val(localStorage.getItem("writing"));
 }
-    
-openFile = function(e) {         
+
+openFile = function(e) {
   readFile(e.target.files[0]);
 }
 
@@ -218,8 +222,10 @@ $('#closeicon, #wmd-input, #wmd-preview').click(function() {
     $('#help').hide();
 });
 
+$(document).on('keyup', settitle);
+
 $(document).on('keydown', function(e) {
-    if (e.keyCode == 80 && (e.ctrlKey || e.metaKey)) {    // CTRL + P 
+    if (e.keyCode == 80 && (e.ctrlKey || e.metaKey)) {    // CTRL + P
         if (mode != 1) {
             mode = 1;
             $('#wmd-input').hide();
@@ -252,9 +258,9 @@ $(document).on('keydown', function(e) {
         else {
             var elem = window.document.createElement('a');
             elem.href = window.URL.createObjectURL(blob);
-            elem.download = 'newfile.md';        
+            elem.download = 'newfile.md';
             document.body.appendChild(elem);
-            elem.click();        
+            elem.click();
             document.body.removeChild(elem);
         }
         e.preventDefault();
@@ -269,7 +275,7 @@ $(document).on('keydown', function(e) {
             $('html').removeClass('fixedheight');
         }
         else if (mode == 2) {
-            $('#wmd-preview').hide();            
+            $('#wmd-preview').hide();
             $('#wmd-input').show().css('float', 'none').css('width', '100%').focus();
             $('body').addClass('fixedheight');
             $('html').addClass('fixedheight');
@@ -280,7 +286,7 @@ $(document).on('keydown', function(e) {
         }
         e.preventDefault();
         return false;
-    }        
+    }
     else if (e.keyCode == 72 && (e.ctrlKey || e.metaKey) && e.shiftKey) {    // CTRL + H
         $('#help').show();
         e.preventDefault();
@@ -292,13 +298,13 @@ $(document).on('keydown', function(e) {
       toggledarkmode(darkmodeenabled);
       e.preventDefault();
       return false;
-    }    
+    }
     else if (e.keyCode == 82 && (e.ctrlKey || e.metaKey) && e.shiftKey) {    // CTRL + SHIFT + R
         $('html').toggleClass('texroman');
         e.preventDefault();
         return false;
-    }    
-    else if (e.keyCode == 76 && (e.ctrlKey || e.metaKey) && e.shiftKey) {    // CTRL + SHIFT + L 
+    }
+    else if (e.keyCode == 76 && (e.ctrlKey || e.metaKey) && e.shiftKey) {    // CTRL + SHIFT + L
         latexenabled = !latexenabled;
         localStorage.setItem("latex", latexenabled ? "1" : "0");
         togglemathjax(latexenabled);
@@ -309,7 +315,7 @@ $(document).on('keydown', function(e) {
         $('#openFileInput').click();
         e.preventDefault();
         return false;
-    } 
+    }
     else if (e.keyCode == 27)  { // ESC
         $('#help').hide();
     }
@@ -326,6 +332,7 @@ var mjpd1 = new mjpd();
 togglemathjax(latexenabled);
 toggledarkmode(darkmodeenabled);
 editor.run();
+settitle();
 </script>
     
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2312083-14"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-2312083-14');</script>
