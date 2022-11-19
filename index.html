@@ -10,6 +10,7 @@
 #           Pagedown Extra (https://github.com/jmcmanus/pagedown-extra)
 #           MathJax (https://www.mathjax.org/)
 #           StackOverflow's editor (https://gist.github.com/gdalgas/a652bce3a173ddc59f66)
+#           jquery.scrollSync (http://trunk.xtf.dk/Project/ScrollSync/)
 #
 -->
 
@@ -86,6 +87,7 @@ html { font-family: sans-serif; }
 <script type="text/javascript" src="mathjax-editing_writing.js"></script>
 <!-- <script type="text/javascript" src="jspdf.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="jquery.scrollSync.js"></script>
 <input id="openFileInput" type="file" />
 <div id="wmd-button-bar" class="wmd-button-bar"></div>
 <textarea id="wmd-input" class="column wmd-input" spellcheck="false"></textarea>
@@ -135,11 +137,29 @@ About
 -----
 Made by <a href="https://twitter.com/JosephErnest">@JosephErnest</a>
 <a href="https://github.com/josephernest/writing">https://github.com/josephernest/writing</a>
-Uses <a href="https://code.google.com/archive/p/pagedown/">Pagedown</a>, <a href="https://github.com/jmcmanus/pagedown-extra">Pagedown Extra</a>, <a href="https://www.mathjax.org/">MathJax</a>, StackOverflow's <a href="https://gist.github.com/gdalgas/a652bce3a173ddc59f66">editor</a> code and the <a href="http://cm-unicode.sourceforge.net/">Computer Modern</a> font.
+Uses <a href="https://code.google.com/archive/p/pagedown/">Pagedown</a>, <a
+href="https://github.com/jmcmanus/pagedown-extra">Pagedown Extra</a>, <a
+href="https://www.mathjax.org/">MathJax</a>, StackOverflow's <a
+href="https://gist.github.com/gdalgas/a652bce3a173ddc59f66">editor</a> code, <a
+href="http://trunk.xtf.dk/Project/ScrollSync/">jquery.scrollSync</a> and the <a href="http://cm-unicode.sourceforge.net/">Computer Modern</a> font.
 </pre>    
 </div>
 
 <script type="text/javascript">
+$("#wmd-input, #wmd-preview").scrollSync();
+
+function scrollBothToTop(cb) {
+    // It only functions if async on page load
+    setTimeout(function () {
+        $("#wmd-input")[0].scrollTop = 0;
+        $("#wmd-preview")[0].scrollTop = 0;
+
+        if (cb) {
+            cb();
+        }
+    }, 0);
+}
+
 togglemathjax = function(enabled) {
     if (enabled) {
         if (!latexenabledonce)
@@ -175,6 +195,7 @@ toggledarkmode = function(enabled){
 
 if (localStorage.getItem("writing") !== null) {
     $('#wmd-input').val(localStorage.getItem("writing"));
+    scrollBothToTop();
 }
     
 openFile = function(e) {         
@@ -190,6 +211,7 @@ readFile = function(file){ // https://stackoverflow.com/a/26298948/1422096
     var contents = e.target.result;
     $('#wmd-input').val(contents);        // display file content
     editor.refreshPreview();
+    scrollBothToTop();
   };
   reader.readAsText(file);
 }
