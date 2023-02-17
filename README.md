@@ -58,10 +58,6 @@ Do you want to support the development of my open-source projects? Please contac
 
 I am currently sponsored by [CodeSigningStore.com](https://codesigningstore.com/). Thank you to them for providing a DigiCert Code Signing Certificate and supporting open source software.
 
-License
-----
-MIT license
-
 Dependencies
 ---
 **Writing** uses [Pagedown](https://code.google.com/archive/p/pagedown/), [Pagedown Extra](https://github.com/jmcmanus/pagedown-extra), [MathJax](https://www.mathjax.org/), StackOverflow's [editor code](https://gist.github.com/gdalgas/a652bce3a173ddc59f66), and the [Computer Modern](http://cm-unicode.sourceforge.net/) font.
