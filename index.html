@@ -78,6 +78,7 @@ html { font-family: sans-serif; }
 
 </head>
 <body class="fixedheight">
+<script>if (typeof module === 'object') { window.module = module; module = undefined; }</script><!-- To make it work with Electron: https://github.com/electron/electron -->   
 <script type="text/javascript" src="Markdown.Converter.js"></script>
 <script type="text/javascript" src="Markdown.Sanitizer.js"></script>
 <script type="text/javascript" src="Markdown.Editor.js"></script>
@@ -86,6 +87,7 @@ html { font-family: sans-serif; }
 <script type="text/javascript" src="mathjax-editing_writing.js"></script>
 <!-- <script type="text/javascript" src="jspdf.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>if (window.module) module = window.module;</script>
 <input id="openFileInput" type="file" />
 <div id="wmd-button-bar" class="wmd-button-bar"></div>
 <textarea id="wmd-input" class="column wmd-input" spellcheck="false"></textarea>
