@@ -21,8 +21,8 @@
 <title>Writing</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <style type="text/css">
-@font-face { font-family: texroman; src: url(cmunrm.otf); font-weight: 400; font-style: normal; font-stretch: normal; }
-@font-face { font-family: texroman; src: url(cmunrb.otf); font-weight: 700; font-style: normal; font-stretch: normal; }
+@font-face { font-family: texroman; src: url(extras/fonts/cmunrm.otf); font-weight: 400; font-style: normal; font-stretch: normal; }
+@font-face { font-family: texroman; src: url(extras/fonts/cmunrb.otf); font-weight: 700; font-style: normal; font-stretch: normal; }
 
 html { font-family: sans-serif; }
 * { margin: 0; padding: 0; border: 0; outline: 0; }
@@ -78,14 +78,14 @@ html { font-family: sans-serif; }
 
 </head>
 <body class="fixedheight">
-<script type="text/javascript" src="Markdown.Converter.js"></script>
-<script type="text/javascript" src="Markdown.Sanitizer.js"></script>
-<script type="text/javascript" src="Markdown.Editor.js"></script>
-<script type="text/javascript" src="Markdown.Extra.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
-<script type="text/javascript" src="mathjax-editing_writing.js"></script>
+<script type="text/javascript" src="extras/js/Markdown.Converter.js"></script>
+<script type="text/javascript" src="extras/js/Markdown.Sanitizer.js"></script>
+<script type="text/javascript" src="extras/js/Markdown.Editor.js"></script>
+<script type="text/javascript" src="extras/js/Markdown.Extra.js"></script>
+<script type="text/javascript" src="extras/mathjax/MathJax.js?config=TeX-AMS_HTML-full"></script>
+<script type="text/javascript" src="extras/js/mathjax-editing_writing.js"></script>
 <!-- <script type="text/javascript" src="jspdf.min.js"></script> -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="extras/js/jquery-1.12.4.min.js"></script>
 <input id="openFileInput" type="file" />
 <div id="wmd-button-bar" class="wmd-button-bar"></div>
 <textarea id="wmd-input" class="column wmd-input" spellcheck="false"></textarea>
@@ -327,8 +327,6 @@ togglemathjax(latexenabled);
 toggledarkmode(darkmodeenabled);
 editor.run();
 </script>
-    
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2312083-14"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-2312083-14');</script>
     
 </body>
 </html>
