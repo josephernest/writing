@@ -12,6 +12,13 @@ Installation
 ----
 Just open `index.html` and that's it! There is no server code. Is that so simple? Yes!
 
+Alternative Installation, using Docker, for server deployment
+----
+- Clone the repository at your desired location
+- Run `docker compose build` for building the container
+- Run `docker compose up -d` for running the container
+- Go to `http://127.0.0.1:9500` to use it!
+
 Usage
 ----
 
